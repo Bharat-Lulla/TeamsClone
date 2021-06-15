@@ -8,14 +8,21 @@ const myPeer = new Peer(undefined, {
 let myVideoStream;
 const myVideo = document.createElement('video')
 myVideo.muted = true;
-const peers = {}
+
+//making empty object so that user can be find which user gets removed
+const peers = {} 
 navigator.mediaDevices.getUserMedia({
   video: true,
   audio: true
 }).then(stream => {
+  //using this object to make stop and play audio and video buttons 
   myVideoStream = stream;
+  //this is for my video to see on the screen and i am muted for myself as i don't want to hear my noise
   addVideoStream(myVideo, stream)
+
+  // answering the call request from user it will send stream and we will add that on our screen
   myPeer.on('call', call => {
+    // answer the call and send stream
     call.answer(stream)
     const video = document.createElement('video')
     call.on('stream', userVideoStream => {
@@ -23,6 +30,7 @@ navigator.mediaDevices.getUserMedia({
     })
   })
 
+  // now we nee to connect to different users video stream that is why we use socket.on here
   socket.on('user-connected', userId => {
     connectToNewUser(userId, stream)
   })
@@ -45,25 +53,36 @@ socket.on('user-disconnected', userId => {
   if (peers[userId]) peers[userId].close()
 })
 
+//myPeer.on will genrate unique userID for users it think we can omit this step of genrating different user id as when we will insert login credentials i think is directly us object id as user id so we need not to pass from client side to server side user id
 myPeer.on('open', id => {
+  //this will send singnal to server and it will catched where socket.on is used using same message i.e join-room
   socket.emit('join-room', ROOM_ID, id)
 })
 
+
+// function used connect to new user
 function connectToNewUser(userId, stream) {
+  //calling the user using userID and sending our video to that user
   const call = myPeer.call(userId, stream)
+
   const video = document.createElement('video')
+  //this function will take argument that is video stream of that user and we will add that in our code 
   call.on('stream', userVideoStream => {
     addVideoStream(video, userVideoStream)
   })
+  //when user leaves the room ie will be used to remove the stream 
   call.on('close', () => {
     video.remove()
   })
 
+  // storing the information of connected users 
   peers[userId] = call
 }
 
 function addVideoStream(video, stream) {
+  //this will allow us to play our video
   video.srcObject = stream
+  //this event is just once stream is loaded we need to play the video
   video.addEventListener('loadedmetadata', () => {
     video.play()
   })
