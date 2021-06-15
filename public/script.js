@@ -50,7 +50,7 @@ navigator.mediaDevices.getUserMedia({
 })
 
 socket.on('user-disconnected', userId => {
-  if (peers[userId]) peers[userId].close()
+  console.log(userId);
 })
 
 //myPeer.on will genrate unique userID for users it think we can omit this step of genrating different user id as when we will insert login credentials i think is directly us object id as user id so we need not to pass from client side to server side user id
