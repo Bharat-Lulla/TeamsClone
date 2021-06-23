@@ -51,7 +51,10 @@ navigator.mediaDevices.getUserMedia({
 })
 
 socket.on('user-disconnected', userId => {
-  if (peers[userId]) peers[userId].close()
+  if (peers[userId]){
+    videoUser.remove()
+    peers[userId].close()
+  } 
 })
 
 //myPeer.on will genrate unique userID for users it think we can omit this step of genrating different user id as when we will insert login credentials i think is directly us object id as user id so we need not to pass from client side to server side user id
@@ -60,21 +63,21 @@ myPeer.on('open', id => {
   socket.emit('join-room', ROOM_ID, id)
 })
 
+const videoUser = document.createElement('video')
 
 // function used connect to new user
 function connectToNewUser(userId, stream) {
   //calling the user using userID and sending our video to that user
   const call = myPeer.call(userId, stream)
 
-  const video = document.createElement('video')
+  
   //this function will take argument that is video stream of that user and we will add that in our code 
   call.on('stream', userVideoStream => {
-    addVideoStream(video, userVideoStream)
+    addVideoStream(videoUser, userVideoStream)
   })
   //when user leaves the room ie will be used to remove the stream 
   call.on('close', () => {
     console.log("byeee");
-    video.remove()
   })
 
   // storing the information of connected user 
