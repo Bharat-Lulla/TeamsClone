@@ -153,3 +153,14 @@ const setPlayVideo = () => {
   `
   document.querySelector('.main__video_button').innerHTML = html;
 }
+
+const shareroomid = document.querySelector("#shareUrl")
+
+shareroomid.addEventListener('click',()=>{
+  var text = ROOM_ID;
+  navigator.clipboard.writeText(text).then(function() {
+    console.log('Async: Copying to clipboard was successful!');
+  }, function(err) {  
+    console.error('Async: Could not copy text: ', err);
+  });
+});
