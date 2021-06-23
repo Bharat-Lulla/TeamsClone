@@ -83,7 +83,7 @@ app.get("/:room", (req, res) => {
 //this will run every time when one user connects to our room
 io.on("connection", (socket) => {
 
-  socket.setTimeout(3000);
+  // socket.setTimeout(3000);
   //this will be called from user side as when user joins it will send this key join-room and 2 parameters
   socket.on("join-room", (roomId, userId) => {
     // this will join the current user to the room id
