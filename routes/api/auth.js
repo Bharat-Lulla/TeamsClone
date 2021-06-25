@@ -50,7 +50,16 @@ router.post("/signup", (req, res) => {
                 //saving data to database
                 newPerson
                   .save()
-                  .then((person) => res.json(person))
+                  .then((person) =>{
+                    const payload = {
+                      id: person.id,
+                      username: person.username,
+                      email: person.email,
+                    };
+                    console.log(jwt.sign(payload,process.env.secret,{expiresIn: 3600}));
+                    res.cookie('token', jwt.sign(payload,process.env.secret,{expiresIn: 3600}));
+                  res.redirect("/api/home");
+                  })
                   .catch((err) => console.log(err));
               });
             });

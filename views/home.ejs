@@ -1,19 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/homePage.css" />
     <title>Document</title>
-</head>
-<body>
-    <form action="/api/home/create" method='POST'>
-        <button type ='submit'>create room</button>
-    </form>
-
-    <form action="/api/home/join" method="POST">
-        <input type="text" placeholder="Room Id" name="roomid">
-        <button type="submit">join</button>
-    </form>
-</body>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left_col">
+        <div class="mainHeading">
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem,
+            placeat.
+          </h1>
+        </div>
+        <div class="subHeading">
+          <h4>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quasi
+            cupiditate quos aperiam nemo sapiente ducimus facilis consequuntur
+            dicta exercitationem temporibus.
+          </h4>
+        </div>
+        <div class="form-element">
+            <div class="createRoom">
+                <form action="/api/home/create" method="POST" class="createform">
+                  <button type="submit" class="btn">create room</button>
+                </form>
+              </div>
+              <div class="joinRoom">
+                <form action="/api/home/join" method="POST" class="joinform">
+                  <div class="wrapper">
+                    <div class="input-data">
+                      <input type="text" required name="roomid" autocomplete="off"/>
+                      <div class="underline"></div>
+                      <label>Room ID</label>
+                    </div>
+                  </div>
+                  <!-- <input type="text" placeholder="Room Id" name="roomid"> -->
+                  <button type="submit" class="btn">join</button>
+                </form>
+              </div>
+        </div>
+        
+      </div>
+      <div class="right_col">
+        <div class="videoChatImage">
+          <img src="img/videoChat.jpg" alt="video chat image" />
+        </div>
+        <div class="caption">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum libero sequi provident minus autem aliquid atque mollitia, vel error fugit voluptatum porro deserunt inventore aut, perferendis molestiae possimus ratione repellat.</p>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

@@ -164,3 +164,14 @@ shareroomid.addEventListener('click',()=>{
     console.error('Async: Could not copy text: ', err);
   });
 });
+
+const chatIcon = document.querySelector(".chatIcon");
+
+chatIcon.addEventListener('click',()=>{
+  const chatRoom = document.querySelector(".main__right");
+  if (chatRoom.style.display === "none") {
+    chatRoom.style.display = "flex";
+  } else {
+    chatRoom.style.display = "none";
+  }
+})
