@@ -70,8 +70,6 @@ app.get("/:room", (req, res) => {
           else{
             res.render("room", { roomId: req.params.room, username:profile.username});
           }
-
-          
         })
         .catch((err) => console.log("Got some error in profile " + err));
     } else {
@@ -97,11 +95,16 @@ io.on("connection", (socket) => {
       io.to(roomId).emit("createMessage", message);
     });
 
+    socket.on('displayScreen',(stream)=>{
+      io.to(roomId).emit("screenShare",stream);
+    })
+
     //this is used when user disconnect from server so we broadcast the msg to all other user that user disconnected and we will remove its video element
     socket.on("disconnect", () => {
       socket.to(roomId).broadcast.emit("user-disconnected", userId);
     });
   });
 });
+
 
 server.listen(process.env.PORT || 3000);
