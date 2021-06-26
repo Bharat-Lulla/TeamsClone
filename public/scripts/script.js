@@ -187,7 +187,7 @@ screenShare.addEventListener('click',()=>{
 
       socket.emit('displayScreen',displayStream);
       
-      socket.on('screenDisplay',stream=>{
+      socket.on('screenShare',stream=>{
         const video = document.createElement('video');
         addVideoStream(video,stream);
       });
