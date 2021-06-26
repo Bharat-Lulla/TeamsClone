@@ -3,12 +3,11 @@ const videoGrid = document.getElementById('video-grid')
 const myPeer = new Peer(undefined, {
   path: '/peerjs',
   host: '/',
-  port: '443'
+  port: '3000'
 })
 let myVideoStream;
 const myVideo = document.createElement('video')
 myVideo.muted = true;
-
 //making empty object so that user can be find which user gets removed
 const peers = {} 
 navigator.mediaDevices.getUserMedia({
@@ -174,4 +173,27 @@ chatIcon.addEventListener('click',()=>{
   } else {
     chatRoom.style.display = "none";
   }
+})
+
+const screenShare = document.querySelector('.screenShare');
+
+screenShare.addEventListener('click',()=>{
+  navigator.mediaDevices.getDisplayMedia({
+    video: true,
+    audio: true
+  }).then(displayStream =>{
+      const displayvideo = document.createElement('video');
+      addVideoStream(displayvideo,displayStream)
+
+      socket.emit('displayScreen',displayStream);
+      
+      socket.on('screenDisplay',stream=>{
+        const video = document.createElement('video');
+        addVideoStream(video,stream);
+      });
+
+      // displayStream.getVideoTracks()[0].addEventListener('ended',()=>{
+      //   displayvideo.remove();
+      // })
+  })
 })
