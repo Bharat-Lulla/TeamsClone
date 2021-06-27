@@ -23,17 +23,26 @@
    <script src="scripts/script.js" defer></script>
    <style>
       #video-grid{
-         display: flex;
-         justify-content: center;
-         flex-wrap: wrap;
+         display: grid;
+         /* justify-content: center; */
+         /* flex-wrap: wrap; */
+         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+         justify-items: center;
+         align-items: center;
+         width: 100%;
+         height: 100%;
       }
       video{
+         display: block;
+         justify-content: center;
          height: 300px;
          width: 300px;
          object-fit: cover;
          padding: 8px;
          -webkit-transform: scaleX(-1);
          transform: scaleX(-1);
+         margin-top: 15px;
+         border-radius: 30px;
       }
       
    </style>
@@ -42,8 +51,7 @@
    <div class="main">
       <div class="main__left">
          <div class="main__videos">
-            <div id="video-grid">
-      
+            <div id="video-grid">   
             </div>
          </div>
          <div class="main__controls">

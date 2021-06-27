@@ -115,10 +115,12 @@ const playStop = () => {
   let enabled = myVideoStream.getVideoTracks()[0].enabled;
   if (enabled) {
     myVideoStream.getVideoTracks()[0].enabled = false;
+    
     setPlayVideo()
   } else {
     setStopVideo()
     myVideoStream.getVideoTracks()[0].enabled = true;
+    
   }
 }
 
@@ -139,6 +141,7 @@ const setUnmuteButton = () => {
 }
 
 const setStopVideo = () => {
+  myVideo.style.display="block";
   const html = `
     <i class="fas fa-video"></i>
     <span>Stop Video</span>
@@ -147,6 +150,7 @@ const setStopVideo = () => {
 }
 
 const setPlayVideo = () => {
+  myVideo.style.display="none";
   const html = `
   <i class="stop fas fa-video-slash"></i>
     <span>Play Video</span>

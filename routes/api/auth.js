@@ -104,7 +104,7 @@ router.post("/login", (req, res) => {
 
             //directing to a home page where user can host a meeting and setting token in local storage
             
-            res.cookie('token', jwt.sign(payload,process.env.secret,{expiresIn: 3600}));
+            res.cookie('token', jwt.sign(payload,process.env.secret,{expiresIn: 3600000000000000}));
             res.redirect("/api/home");
         
         } else {

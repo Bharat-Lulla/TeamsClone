@@ -21,6 +21,7 @@
     justify-content: center;
     align-items: center;
     padding: 40px;
+    overflow-y: scroll;
 }
 
 .main__controls {
@@ -102,4 +103,11 @@
 .unmute, .stop {
     color: #CC3B33;
 }
-
+@media (max-width: 800px){
+    video{
+        width: 800px;
+    }
+    #video-grid{
+        grid-template-columns: min-content
+    }
+  }
