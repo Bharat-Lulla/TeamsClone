@@ -99,7 +99,11 @@
          </div>
          <div class="main__chat_window">
             <ul class="messages">
-               
+               <%  chats.forEach(function(message){ %>
+
+                  <li><%=message%></li> <br>
+
+                <%  }) %>
             </ul>
 
          </div>

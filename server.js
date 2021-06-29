@@ -44,6 +44,7 @@ mongoose
   });
 
 const Person = require('./models/Person');
+const Room = require("./models/Room");
 
 //actual routes
 app.use('/api/auth',auth);
@@ -68,7 +69,10 @@ app.get("/:room", (req, res) => {
               .json({ profilenotfound: "no profile found" });
           }
           else{
-            res.render("room", { roomId: req.params.room, username:profile.username});
+            Room.findOne({roomId: req.params.room}).then((room)=>{
+              res.render("room", { roomId: req.params.room, username:profile.username, chats:room.chats});
+            })
+            
           }
 
           
@@ -94,6 +98,11 @@ io.on("connection", (socket) => {
     // messages
     socket.on("message", (message) => {
       //send message to the same room
+      // Room.findAndModify({ roomId: roomid},{ $push: { chates: message }}) updating chats array
+      Room.findOne({ roomId: roomId}, function(err, foundRoom){
+        foundRoom.chats.push(message);
+        foundRoom.save();
+      });
       io.to(roomId).emit("createMessage", message);
     });
 
