@@ -163,6 +163,7 @@ const shareroomid = document.querySelector("#shareUrl")
 shareroomid.addEventListener('click',()=>{
   var text = ROOM_ID;
   navigator.clipboard.writeText(text).then(function() {
+    alert("room ID is copied")
     console.log('Async: Copying to clipboard was successful!');
   }, function(err) {  
     console.error('Async: Could not copy text: ', err);
@@ -170,12 +171,30 @@ shareroomid.addEventListener('click',()=>{
 });
 
 const chatIcon = document.querySelector(".chatIcon");
+const chatRoom = document.querySelector(".main__right");
+const videoRoom = document.querySelector(".main__left");
+const closeChat = document.querySelector(".closeChat");
 
 chatIcon.addEventListener('click',()=>{
-  const chatRoom = document.querySelector(".main__right");
-  if (chatRoom.style.display === "none") {
+  
+  if (window.getComputedStyle(chatRoom).display === "none") {
     chatRoom.style.display = "flex";
   } else {
     chatRoom.style.display = "none";
   }
+  chatRoom.classList.add("ChatClass")
+  videoRoom.classList.add("VideoClass")
 })
+
+closeChat.addEventListener('click',()=>{
+  chatRoom.classList.remove("ChatClass")
+  videoRoom.classList.remove("VideoClass")
+  chatRoom.style.display = "none";
+})
+
+
+
+const toggleControlMenu = () =>{
+  const menu = document.querySelector(".menu")
+  menu.classList.toggle('toggleClass')
+}

@@ -10,9 +10,7 @@
     flex-direction: column;
 }
 
-.main__right {
-    flex: 0.2
-}
+
 
 .main__videos {
     flex-grow: 1;
@@ -29,6 +27,7 @@
 }
 
 .main__right {
+    flex: 0.2;
     background-color: #242324;
     border-left: 1px solid #3D3D42;
 }
@@ -103,11 +102,55 @@
 .unmute, .stop {
     color: #CC3B33;
 }
-@media (max-width: 800px){
-    video{
-        width: 800px;
+.hamMenu{
+    display: none;
+}
+.closeChat{
+    display: none;
+}
+.flexclass{
+    display: flex;
+}
+.noneclass{
+    display: none;
+}
+
+@media(max-width:887px) {
+    .hamMenu{
+        display: block;
+        z-index: 9999;
     }
-    #video-grid{
-        grid-template-columns: min-content
+    .menu{
+        display: none;
     }
-  }
+    .main__controls{
+        position: relative;
+    }   
+    .main__right{
+        display: none;
+    }
+    .main__right.ChatClass{
+        flex: 0.8;
+        flex-grow: 1;
+    }
+    .main__left.VideoClass{
+        display: none;
+    }
+    .closeChat{
+        display:block;
+        position: absolute;
+        top: 0;
+        left: 12px;
+    }
+    h1{
+        padding: 0;
+    }
+   
+    .menu.toggleClass{
+        display: block;
+        position: absolute;
+        right: 41px;
+        bottom:7px;
+        background-color: #1C1E20;
+    }
+}
