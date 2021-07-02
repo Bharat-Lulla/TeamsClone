@@ -11,7 +11,6 @@ myVideo.muted = true;
 
 //making empty object so that user can be find which user gets removed
 const peers = {} 
-let myUserId;
 navigator.mediaDevices.getUserMedia({
   video: true,
   audio: true
@@ -33,7 +32,6 @@ navigator.mediaDevices.getUserMedia({
 
   // now we nee to connect to different users video stream that is why we use socket.on here
   socket.on('user-connected', userId => {
-    myUserId=userId;
     connectToNewUser(userId, stream)
   })
   // input value
@@ -200,40 +198,3 @@ const toggleControlMenu = () =>{
   const menu = document.querySelector(".menu")
   menu.classList.toggle('toggleClass')
 }
-
-screenShare.addEventListener('click',()=>{
-
-  socket.emit('screenShare');
-  navigator.mediaDevices.getDisplayMedia({
-    video:true,
-    audio:true
-  }).then(stream=>{
-    socket.on('callAllUsers',(usersId)=>{
-      usersId.map((id)=>{
-        if(id === myUserId )
-          continue;
-        const callScreen = myPeer.call(id, stream)
-
-        const video = document.createElement('video')
-        //this function will take argument that is video stream of that user and we will add that in our code 
-        // callScreen.on('stream', userVideoStream => {
-        //   addVideoStream(video, userVideoStream)
-        // })
-        //when user leaves the room ie will be used to remove the stream 
-        callScreen.on('close', () => {
-          console.log("byeee");
-          video.remove()
-        })
-      })
-    })
-
-    myPeer.on('call', callScreen => {
-      // answer the call and send stream
-      callScreen.answer()
-      const video = document.createElement('video')
-      call.on('stream', userVideoStream => {
-        addVideoStream(video, userVideoStream)
-      })
-    })
-  }) 
-})
