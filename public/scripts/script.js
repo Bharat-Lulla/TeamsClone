@@ -5,7 +5,7 @@ const myPeer = new Peer(undefined, {
   host: '/',
   port: '443'
 })
-let myVideoStream;
+let myStream;
 const myVideo = document.createElement('video')
 myVideo.muted = true;
 
@@ -16,7 +16,7 @@ navigator.mediaDevices.getUserMedia({
   audio: true
 }).then(stream => {
   //using this object to make stop and play audio and video buttons 
-  myVideoStream = stream;
+  myStream = stream;
   //this is for my video to see on the screen and i am muted for myself as i don't want to hear my noise
   addVideoStream(myVideo, stream)
 
@@ -100,26 +100,26 @@ const scrollToBottom = () => {
 
 
 const muteUnmute = () => {
-  const enabled = myVideoStream.getAudioTracks()[0].enabled;
+  const enabled = myStream.getAudioTracks()[0].enabled;
   if (enabled) {
-    myVideoStream.getAudioTracks()[0].enabled = false;
+    myStream.getAudioTracks()[0].enabled = false;
     setUnmuteButton();
   } else {
     setMuteButton();
-    myVideoStream.getAudioTracks()[0].enabled = true;
+    myStream.getAudioTracks()[0].enabled = true;
   }
 }
 
 const playStop = () => {
   console.log('object')
-  let enabled = myVideoStream.getVideoTracks()[0].enabled;
+  let enabled = myStream.getVideoTracks()[0].enabled;
   if (enabled) {
-    myVideoStream.getVideoTracks()[0].enabled = false;
+    myStream.getVideoTracks()[0].enabled = false;
     
     setPlayVideo()
   } else {
     setStopVideo()
-    myVideoStream.getVideoTracks()[0].enabled = true;
+    myStream.getVideoTracks()[0].enabled = true;
     
   }
 }
