@@ -84,6 +84,8 @@ app.get("/:room", (req, res) => {
   });
 });
 
+const users = [];
+
 //this will run every time when one user connects to our room
 io.on("connection", (socket) => {
 
@@ -91,6 +93,8 @@ io.on("connection", (socket) => {
   //this will be called from user side as when user joins it will send this key join-room and 2 parameters
   socket.on("join-room", (roomId, userId) => {
     // this will join the current user to the room id
+    users.push(userId);
+    console.log(users);
     socket.join(roomId);
     // now we need broadcast to other user that user is connected and what it does it will not send message back to current user as he or she that i am connected
     // this is the old syntax because using older version of socket just make sure if you update to change here the new syntax of broadcast
@@ -109,6 +113,10 @@ io.on("connection", (socket) => {
     //this is used when user disconnect from server so we broadcast the msg to all other user that user disconnected and we will remove its video element
     socket.on("disconnect", () => {
       socket.to(roomId).broadcast.emit("user-disconnected", userId);
+    });
+    
+    socket.on('screenShare', ()=>{
+      socket.emit("callAllUsers",users)
     });
   });
 });
