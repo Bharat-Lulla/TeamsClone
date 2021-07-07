@@ -10,6 +10,9 @@ body,
 input {
   font-family: "Poppins", sans-serif;
 }
+p{
+  font-weight: bold;
+}
 
 .container {
   position: relative;
@@ -102,7 +105,7 @@ form.sign-in-form {
   font-weight: 500;
 }
 
-.social-text {
+/* .social-text {
   padding: 0.7rem 0;
   font-size: 1rem;
 }
@@ -130,7 +133,7 @@ form.sign-in-form {
 .social-icon:hover {
   color: #4481eb;
   border-color: #4481eb;
-}
+} */
 
 .btn {
   width: 150px;
@@ -147,9 +150,7 @@ form.sign-in-form {
   transition: 0.5s;
 }
 
-.btn:hover {
-  background-color: #4d84e2;
-}
+
 .panels-container {
   position: absolute;
   height: 100%;

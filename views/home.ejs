@@ -12,16 +12,13 @@
       <div class="left_col">
         <div class="mainHeading">
           <h1>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem,
-            placeat.
+            Create or Join room for video meeting and chatting
           </h1>
         </div>
         <div class="subHeading">
-          <h4>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quasi
-            cupiditate quos aperiam nemo sapiente ducimus facilis consequuntur
-            dicta exercitationem temporibus.
-          </h4>
+          <p>
+            A place to video chat with everyone simple interface and responsive for various devices mobile or desktop 
+          </p>
         </div>
         <div class="form-element">
             <div class="createRoom">
@@ -33,13 +30,13 @@
                 <form action="/api/home/join" method="POST" class="joinform">
                   <div class="wrapper">
                     <div class="input-data">
-                      <input type="text" required name="roomid" autocomplete="off"/>
+                      <input id="roomId" type="text" required name="roomid" autocomplete="off"/>
                       <div class="underline"></div>
-                      <label>Room ID</label>
+                      <label for="roomId">Room ID</label>
                     </div>
                   </div>
                   <!-- <input type="text" placeholder="Room Id" name="roomid"> -->
-                  <button type="submit" class="btn">join</button>
+                  <button type="submit" class="btn join">join</button>
                 </form>
               </div>
         </div>
@@ -49,9 +46,7 @@
         <div class="videoChatImage">
           <img src="img/videoChat.jpg" alt="video chat image" />
         </div>
-        <div class="caption">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum libero sequi provident minus autem aliquid atque mollitia, vel error fugit voluptatum porro deserunt inventore aut, perferendis molestiae possimus ratione repellat.</p>
-        </div>
+        
       </div>
     </div>
   </body>
