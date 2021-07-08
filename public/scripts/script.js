@@ -6,8 +6,9 @@ const myPeer = new Peer(undefined, {
   port: '443'
 })
 let myStream;
-const myVideo = document.createElement('video')
+const myVideo = document.createElement('video');
 myVideo.muted = true;
+let userVideo;
 
 //making empty object so that user can be find which user gets removed
 const peers = {} 
@@ -26,6 +27,7 @@ navigator.mediaDevices.getUserMedia({
     call.answer(stream)
     const video = document.createElement('video')
     call.on('stream', userVideoStream => {
+      userVideo.remove();
       addVideoStream(video, userVideoStream)
     })
   })
@@ -67,13 +69,13 @@ function connectToNewUser(userId, stream) {
   const call = myPeer.call(userId, stream)
 
   const video = document.createElement('video')
+  userVideo = video;
   //this function will take argument that is video stream of that user and we will add that in our code 
   call.on('stream', userVideoStream => {
     addVideoStream(video, userVideoStream)
   })
   //when user leaves the room ie will be used to remove the stream 
   call.on('close', () => {
-    console.log("byeee");
     video.remove()
   })
 
@@ -111,7 +113,6 @@ const muteUnmute = () => {
 }
 
 const playStop = () => {
-  console.log('object')
   let enabled = myStream.getVideoTracks()[0].enabled;
   if (enabled) {
     myStream.getVideoTracks()[0].enabled = false;
@@ -141,7 +142,6 @@ const setUnmuteButton = () => {
 }
 
 const setStopVideo = () => {
-  myVideo.style.display="block";
   const html = `
     <i class="fas fa-video"></i>
     <span>Stop Video</span>
@@ -150,7 +150,6 @@ const setStopVideo = () => {
 }
 
 const setPlayVideo = () => {
-  myVideo.style.display="none";
   const html = `
   <i class="stop fas fa-video-slash"></i>
     <span>Play Video</span>

@@ -51,7 +51,6 @@ app.use('/api/auth',auth);
 app.use('/api/home',home);
 
 app.get("/", (req, res) => {
-  // res.redirect(`/${uuidV4()}`);
   res.redirect('/api/auth/login');
 });
 
@@ -89,7 +88,6 @@ app.get("/:room", (req, res) => {
 //this will run every time when one user connects to our room
 io.on("connection", (socket) => {
 
-  // socket.setTimeout(3000);
   //this will be called from user side as when user joins it will send this key join-room and 2 parameters
   socket.on("join-room", (roomId, userId) => {
     // this will join the current user to the room id
@@ -100,7 +98,6 @@ io.on("connection", (socket) => {
     // messages
     socket.on("message", (message) => {
       //send message to the same room
-      // Room.findAndModify({ roomId: roomid},{ $push: { chates: message }}) updating chats array
       Room.findOne({ roomId: roomId}, function(err, foundRoom){
         foundRoom.chats.push(message);
         foundRoom.save();

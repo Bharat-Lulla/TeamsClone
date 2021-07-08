@@ -17,7 +17,6 @@ router.get("/", (req, res) => res.json({ test: "Auth is being tested" }));
 
 //Import schema for Person to Register
 const Person = require("../../models/Person");
-// const Profile = require("../../models/Profile");
 
 //@type      POST
 //@route     /api/auth/signup
