@@ -27,7 +27,6 @@ navigator.mediaDevices.getUserMedia({
     call.answer(stream)
     const video = document.createElement('video')
     call.on('stream', userVideoStream => {
-      userVideo.remove();
       addVideoStream(video, userVideoStream)
     })
   })
@@ -53,6 +52,7 @@ navigator.mediaDevices.getUserMedia({
 })
 
 socket.on('user-disconnected', userId => {
+  userVideo.remove();
   if (peers[userId]) peers[userId].close()
 })
 
