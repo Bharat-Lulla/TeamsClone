@@ -3,7 +3,12 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const bodyParser = require("body-parser");
+
 // const passport = require("passport");
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 //static files
 router.use(express.static("public"));

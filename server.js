@@ -83,11 +83,11 @@ app.get("/:room", (req, res) => {
   });
 });
 
-
+let users = [];
 
 //this will run every time when one user connects to our room
 io.on("connection", (socket) => {
-
+  users.push(userId);
   //this will be called from user side as when user joins it will send this key join-room and 2 parameters
   socket.on("join-room", (roomId, userId) => {
     // this will join the current user to the room id
@@ -109,6 +109,12 @@ io.on("connection", (socket) => {
     socket.on("disconnect", () => {
       socket.to(roomId).broadcast.emit("user-disconnected", userId);
     });
+
+    //this is used for emiting event for screen share
+    socket.on('screenShare',()=>{
+      console.log("hello");
+      socket.emit('callAllUser',users);
+    })
   });
 });
 

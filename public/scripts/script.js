@@ -5,6 +5,7 @@ const myPeer = new Peer(undefined, {
   host: '/',
   port: '443'
 })
+let myId;
 let myStream;
 const myVideo = document.createElement('video')
 myVideo.muted = true;
@@ -56,6 +57,7 @@ socket.on('user-disconnected', userId => {
 
 //myPeer.on will genrate unique userID for users it think we can omit this step of genrating different user id as when we will insert login credentials i think is directly us object id as user id so we need not to pass from client side to server side user id
 myPeer.on('open', id => {
+  myId = id;
   //this will send singnal to server and it will catched where socket.on is used using same message i.e join-room
   socket.emit('join-room', ROOM_ID, id)
 })
@@ -174,6 +176,7 @@ const chatIcon = document.querySelector(".chatIcon");
 const chatRoom = document.querySelector(".main__right");
 const videoRoom = document.querySelector(".main__left");
 const closeChat = document.querySelector(".closeChat");
+const shareScreen = document.querySelector(".shareScreen");
 
 chatIcon.addEventListener('click',()=>{
   
@@ -198,3 +201,40 @@ const toggleControlMenu = () =>{
   const menu = document.querySelector(".menu")
   menu.classList.toggle('toggleClass')
 }
+
+shareScreen.addEventListener("click", () => {
+  
+  navigator.mediaDevices
+  .getDisplayMedia({
+    video: true,
+    audio: true,
+  })
+  .then((stream) => {
+   
+    socket.emit("screenShare");     
+    socket.on("callAllUser", (users) => {
+      console.log('hii');
+      for (let i = 0; i < users.length; i++) {
+        if (users[i] == myId) {
+          console.log('found user');
+          continue;
+        }
+        const call = myPeer.call(users[i], stream);
+        // const video = document.createElement("video");
+        // call.on("stream", (userVideoStream) => {
+        //   addVideoStream(video, userVideoStream);
+        // });
+        
+
+        
+      }
+      myPeer.on("call", (call) => {
+        call.answer();
+        const video = document.createElement("video");
+        call.on("stream", (userVideoStream) => {
+          addVideoStream(video, userVideoStream);
+        });
+      });
+    });
+  });
+});
