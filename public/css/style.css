@@ -13,8 +13,6 @@
     width: 300px;
     object-fit: cover;
     padding: 8px;
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
     margin-top: 15px;
     border-radius: 30px;
  }

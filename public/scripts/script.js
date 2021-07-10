@@ -231,6 +231,8 @@ shareScreen.addEventListener("click", () => {
       myPeer.on("call", (call) => {
         call.answer();
         const video = document.createElement("video");
+        video.style.CSSStyleDeclaration.webkitTransform = "scaleX(1)";
+        video.style.transform = "scaleX(1)";
         call.on("stream", (userVideoStream) => {
           addVideoStream(video, userVideoStream);
         });
