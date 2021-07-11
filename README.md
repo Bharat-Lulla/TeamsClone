@@ -16,7 +16,13 @@ https://warm-sierra-09495.herokuapp.com/
 2. Chat, Video, Audio enable disable option is working fine.
 3. Added share room Id button that will copy room id directly to the clipboard so that sharing can be done without human errors.
 
-## Features trying to implement
+### Features trying to implement
 
 1. Screen Sharing
 2. Video Recording
+
+### Screen Shots
+
+#### Sign in
+
+
