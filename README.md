@@ -3,6 +3,19 @@
 Link of heroku app you can sign up and login if you already have account without account you user will not be authorised to join meeting 
 https://collab-room-2902.herokuapp.com/
 
+### Agile Methods Used
+
+I engaged in a weekly sprints with mentors and active feedback loop was established. Based on live feedback, set of improvements and features were uptaken for my next sprint cycle
+#### My sprints looked like
+
+Sprint 1 was about design and prototype of collab room 
+
+Sprint 2 was implementation of minimal vaible product 
+
+Sprint 3 focused on improving accessibility and historical chat feature 
+
+Spritn 4 was adding of Screen Share feature 
+
 ### Tech Stack
 Node.js, Express, peer.js, socket.io, EJS, CSS, JavaScript, Heroku, git 
 
@@ -20,18 +33,6 @@ Node.js, Express, peer.js, socket.io, EJS, CSS, JavaScript, Heroku, git
 2. Chat, Video, Audio enable disable option is working fine.
 3. Added share room Id button that will copy room id directly to the clipboard so that sharing can be done without human errors.
 
-<<<<<<< HEAD
-### Features trying to implement
-
-1. Screen Sharing
-2. Video Recording
-
-### Screen Shots
-
-#### Sign in
-
-
-=======
 ### Improvements and Enhancements
 1. Screen Share UI and auto focus and removal of screen when user stops screen share
 2. Auto focus on the person speaking in the meet chainging size and width of video elements based on number of people in the meet
@@ -69,4 +70,3 @@ Input room Id and click join room button to join the room and incorrect room id 
 3. Share Room id button will copy the room id to clipboard then you just have to share room id to other user that you want to join the meet 
 4. Chat button allows to toggle the chat area
 5. Screen share allows user to share his/her screen with other user that are currently present in the meeting
->>>>>>> 02f04c3e57815f9af1ca8c1af24b27cf05c23fd3
